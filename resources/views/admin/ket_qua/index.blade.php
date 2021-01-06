@@ -34,7 +34,7 @@
         <table id="data-table" align="center" width="100%"
                class="table table-hover table-striped table-bordered border">
             <thead>
-            <tr class="bg-danger">
+            <tr class="bg-primary">
                 <th>STT</th>
                 <th>Bài khảo sát</th>
                 <th>Người khảo sát</th>

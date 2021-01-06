@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::get('/khao-sat', 'KhaoSatController@index');
-    Route::get('/cau-hoi', 'CauHoiController@index');
-    Route::get('/ket-qua', 'KetQuaController@index');
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'guest'], function () {
+    Route::resource('/', 'DashboardController');
+    Route::resource('khao-sat', 'KhaoSatController');
+    Route::resource('cau-hoi', 'CauHoiController');
+    Route::resource('ket-qua', 'KetQuaController');
+    Route::resource('tai-khoan', 'TaiKhoanController');
 });
 
 Route::group(['namespace' => 'Theme'], function () {

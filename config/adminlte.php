@@ -149,7 +149,7 @@ return [
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-layouts-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
     'sidebar_nav_animation_speed' => 300,
@@ -171,7 +171,7 @@ return [
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
-    'right_sidebar_scrollbar_theme' => 'os-theme-light',
+    'right_sidebar_scrollbar_theme' => 'os-layouts-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
     /*
@@ -231,18 +231,8 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
             'text' => 'Tài khoản',
-            'url' => 'admin/users',
+            'url' => 'dashboard/tai-khoan',
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'QUẢN LÝ'],
@@ -288,18 +278,18 @@ return [
         [
             'text' => 'Bài khảo sát',
             'icon' => 'fas fa-fw fa-book-reader',
-            'url' => '/admin/khao-sat',
+            'url' => '/dashboard/khao-sat',
         ],
         [
             'text' => 'Quản lý câu hỏi',
             'icon' => 'fas fa-fw fa-question',
-            'url' => '/admin/cau-hoi',
+            'url' => '/dashboard/cau-hoi',
         ]
         ,
         [
             'text' => 'Kết quả khảo sát',
             'icon' => 'fas fa-fw fa-poll',
-            'url' => '/admin/ket-qua',
+            'url' => '/dashboard/ket-qua',
         ]
     ],
 
@@ -399,7 +389,7 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-layouts-center-radar.min.css',
                 ],
                 [
                     'type' => 'js',

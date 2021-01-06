@@ -54,7 +54,7 @@
     };
     var Default = {
       controlsidebarSlide: true,
-      scrollbarTheme: 'os-theme-light',
+      scrollbarTheme: 'os-layouts-light',
       scrollbarAutoHide: 'l'
     };
     /**
@@ -323,7 +323,7 @@
       CONTROL_SIDEBAR_OPEN: 'control-sidebar-open'
     };
     var Default = {
-      scrollbarTheme: 'os-theme-light',
+      scrollbarTheme: 'os-layouts-light',
       scrollbarAutoHide: 'l',
       panelAutoHeight: true,
       loginRegisterAutoHeight: true

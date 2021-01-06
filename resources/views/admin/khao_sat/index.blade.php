@@ -34,26 +34,44 @@
         <table id="data-table" align="center" width="100%"
                class="table table-hover table-striped table-bordered border">
             <thead>
-            <tr class="bg-danger">
-                <th>STT</th>
-                <th>Tiêu đề</th>
-                <th>Mô tả</th>
-                <th>Tác giả</th>
-                <th>Trạng thái</th>
+            <tr class="bg-primary">
+                <th class="text-center">Mã khảo sát</th>
+                <th class="text-center">Tiêu đề</th>
+                <th class="text-center">Mô tả</th>
+                <th class="text-center">Đối tượng</th>
+                <th class="text-center">Tác giả</th>
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center">
+                    <button onclick="location.href = '/dashboard/khao-sat/create'" class="btn btn-success btn-sm">
+                        Thêm
+                    </button>
+                </th>
             </tr>
             </thead>
             <tbody>
-            @foreach($posts as $key => $post)
+            @foreach($posts as $post)
                 <tr>
-                    <td>{{$key + 1}}</td>
+                    <td class="text-center">KS00{{$post->id}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
-                    <td>{{($post->user)->name}}</td>
-                    <td>@if($post->status ==1)
-                            <span class="text-success">Hiển thị</span>
+                    <td class="text-center">{{$post->respondent}}</td>
+                    <td class="text-center">{{($post->user)->name}}</td>
+                    <td class="text-center">@if($post->status ==1)
+                            <span class="text-success"><i class="fa fa-check"></i></span>
                         @else
-                            <span class="text-success">Đang ẩn</span>
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
                         @endif
+                    </td>
+                    <td class="d-flex justify-content-center">
+                        <button class="btn btn-sm btn-warning"
+                                onclick="location.href = '/dashboard/khao-sat/{{$post->id}}'">Sửa
+                        </button>
+                        <form class="ml-1" action="{{route('khao-sat.destroy', $post->id)}}" method="post"
+                              onsubmit="return confirm('Đồng ý xoá?');">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-sm btn-outline-danger">Xoá</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

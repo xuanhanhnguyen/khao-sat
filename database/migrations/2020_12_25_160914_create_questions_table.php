@@ -20,6 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->string('answers');
             $table->bigInteger('parent_id')->nullable();
             $table->tinyInteger('type_id')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts');

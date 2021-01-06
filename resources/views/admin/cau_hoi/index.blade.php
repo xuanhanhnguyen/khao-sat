@@ -30,33 +30,60 @@
             {{ session('message') }}
         </div>
     @endif
+    <div class="form-group mb-2 d-flex align-items-center">
+        <label class="mb-0" for="post">Khảo sát: </label>
+        <select class="form-control w-auto" name="post" id="post" onchange="location.href = '?s='+$('#post').val()">
+            @foreach($posts as $post)
+                <option {{isset($_GET['s']) && $_GET['s'] == $post->id ? 'selected':''}} value="{{$post->id}}">{{$post->title}}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="callout-top callout-top-danger col-md-12">
         <table id="data-table" align="center" width="100%"
                class="table table-hover table-striped table-bordered border">
             <thead>
-            <tr class="bg-danger">
-                <th>STT</th>
-                <th>Nội dung</th>
-                <th>Câu trả lời</th>
-                <th>Trạng thái</th>
+            <tr class="bg-primary">
+                <th class="text-center">Mã câu hỏi</th>
+                <th class="text-center">Nội dung</th>
+                <th class="text-center">Câu trả lời</th>
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center">
+                    <button onclick="location.href = '/dashboard/cau-hoi/create'" class="btn btn-success btn-sm">
+                        Thêm
+                    </button>
+                </th>
+
             </tr>
             </thead>
             <tbody>
-            @foreach($posts as $key => $post)
+            @foreach($questions as $question)
                 <tr>
-                    <td>{{$key + 1}}</td>
-                    <td>{{$post->content}}</td>
-                    @php
-                        $abc = explode(',',$post->answers);
-                    @endphp
+                    <td>CH00{{$question->id}}</td>
+                    <td>{{$question->content}}</td>
                     <td>
                         <ol type="A">
-                            @foreach($abc as $item)
+                            @foreach(explode(',', $question->answers) as $item)
                                 <li>{{$item}}</li>
                             @endforeach
                         </ol>
                     </td>
-                    <td><span class="text-success">Hiển thị</span></td>
+                    <td class="text-center">@if($question->status ==1)
+                            <span class="text-success"><i class="fa fa-check"></i></span>
+                        @else
+                            <span class="text-danger"><i class="fa fa-times"></i></span>
+                        @endif
+                    </td>
+                    <td class="d-flex justify-content-center">
+                        <button class="btn btn-sm btn-warning"
+                                onclick="location.href = '/dashboard/cau-hoi/{{$question->id}}'">Sửa
+                        </button>
+                        <form class="ml-1" action="{{route('cau-hoi.destroy', $question->id)}}" method="post"
+                              onsubmit="return confirm('Đồng ý xoá?');">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-sm btn-outline-danger">Xoá</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

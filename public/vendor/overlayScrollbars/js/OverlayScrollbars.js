@@ -1476,7 +1476,7 @@
                 var scrollbarsVisibilityAllowedValues = 'v:visible h:hidden a:auto';
                 var scrollbarsAutoHideAllowedValues = 'n:never s:scroll l:leave m:move';
                 var optionsDefaultsAndTemplate = {
-                    className: ['os-theme-dark', classNameAllowedValues],                //null || string
+                    className: ['os-layouts-dark', classNameAllowedValues],                //null || string
                     resize: ['none', resizeAllowedValues],                               //none || both  || horizontal || vertical || n || b || h || v
                     sizeAutoCapable: booleanTrueTemplate,                                //true || false
                     clipAlways: booleanTrueTemplate,                                     //true || false
@@ -2157,7 +2157,7 @@
                 var _classNameScrollbarHorizontal = _classNameScrollbar + _strMinusHorizontal;
                 var _classNameScrollbarVertical = _classNameScrollbar + _strMinusVertical;
                 var _classNameDragging = _cassNamesPrefix + 'dragging';
-                var _classNameThemeNone = _cassNamesPrefix + 'theme-none';
+                var _classNameThemeNone = _cassNamesPrefix + 'layouts-none';
                 var _classNamesDynamicDestroy = [
                     _classNameViewportNativeScrollbarsInvisible,
                     _classNameViewportNativeScrollbarsOverlaid,
@@ -2821,7 +2821,7 @@
                     var oldClassNames = _oldClassName !== undefined && _oldClassName !== null ? _oldClassName.split(_strSpace) : [_strEmpty];
                     var currClassNames = _classNameCache !== undefined && _classNameCache !== null ? _classNameCache.split(_strSpace) : [_strEmpty];
 
-                    //remove none theme from diff list to prevent update
+                    //remove none layouts from diff list to prevent update
                     var idx = inArray(_classNameThemeNone, diff);
                     var curr;
                     var i;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['author', 'title', 'description', 'respondent'];
+    protected $fillable = ['author', 'title', 'description', 'respondent', 'slug', 'status'];
 
     public function questions()
     {

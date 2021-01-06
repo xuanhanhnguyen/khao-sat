@@ -1,4 +1,4 @@
-@extends('layouts.theme')
+@extends('layouts.main')
 
 @section('main')
     <section class="main container">
