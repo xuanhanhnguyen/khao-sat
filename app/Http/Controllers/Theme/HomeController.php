@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Theme;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Result;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class HomeController extends Controller
 
             $post_student = Post::where([
                 ['status', '=', 1],
-                ['respondent', 'like', '%2%']
+                ['respondent', 'like', '%' . Role::find(2)->name . '%']
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)
@@ -31,7 +32,7 @@ class HomeController extends Controller
 
             $post_teacher = Post::where([
                 ['status', '=', 1],
-                ['respondent', 'like', '%3%']
+                ['respondent', 'like', '%' . Role::find(3)->name . '%']
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)
@@ -39,7 +40,7 @@ class HomeController extends Controller
 
             $post_enterprise = Post::where([
                 ['status', '=', 1],
-                ['respondent', 'like', '%4%']
+                ['respondent', 'like', '%' . Role::find(4)->name . '%']
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)
@@ -49,7 +50,7 @@ class HomeController extends Controller
         } else {
             $post_new = Post::where([
                 ['status', '=', 1],
-                ['respondent', 'like', '%' . Auth::user()->role_id . '%']
+                ['respondent', 'like', '%' . Role::find(Auth::id())->name . '%']
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)

@@ -22,7 +22,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item d-none d-md-block">
                     <h4 class="text-light"><span class="nav-text">TRƯỜNG ĐẠI HỌC VINH</span><br>
-                        CỔNG THÔNG TIN SINH VIÊN THỰC TẬP
+{{--                        CỔNG THÔNG TIN SINH VIÊN THỰC TẬP--}}
                     </h4>
                 </li>
             </ul>
