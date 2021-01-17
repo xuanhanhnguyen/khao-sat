@@ -4,7 +4,7 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Sửa câu hỏi: </h1>
+    <h1>Sửa câu hỏi</h1>
 @stop
 
 @section('content')
@@ -12,6 +12,8 @@
         <form action="{{route('cau-hoi.update', $question->id)}}" method="post">
             {{ csrf_field() }}
             @method('put')
+            <input type="text" name="post_id" value="{{$question->post_id}}"
+                   class="form-control d-none">
             {{--title--}}
             <div class="form-group">
                 <label for="content">Nội dung câu hỏi:</label>

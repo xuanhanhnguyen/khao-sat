@@ -6,7 +6,7 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Danh sách bài khảo sát: </h1>
+    <h1>Danh sách bài khảo sát</h1>
 @stop
 
 @section('content')
@@ -51,7 +51,7 @@
             <tbody>
             @foreach($posts as $post)
                 <tr>
-                    <td class="text-center">KS00{{$post->id}}</td>
+                    <td class="text-center">{{$post->id}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
                     <td class="text-center">{{$post->respondent}}</td>

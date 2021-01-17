@@ -18,11 +18,12 @@ class DetailController extends Controller
 
     public function index($slug)
     {
+        $id = \request()->user_id;
         $post = Post::with('questions')->where([['slug', $slug], ['status', 1]])->first();
         if (is_null($post)) return redirect('/');
 
         $result = Result::with('post')->where([
-            ['user_id', Auth::id()],
+            ['user_id', (Auth::user()->role == "admin" && isset($id)) ? $id : Auth::id()],
             ['post_id', $post->id]
         ])->first();
 

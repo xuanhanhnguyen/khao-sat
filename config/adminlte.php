@@ -225,7 +225,7 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
+            'text' => 'Tìm kiếm',
             'search' => true,
             'topnav' => true,
         ],

@@ -1,11 +1,12 @@
+{{-- resources/views/admin/dashboard.blade.php --}}
+
 @extends('admin.layouts.app')
 
 @section('main')
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Chào mừng bạn đến với trang quản lý</h1>
-    <h1 class="text-primary">{{$post->title}}</h1>
+    <h1>{{$post->title}}</h1>
 @stop
 
 @section('content')
@@ -55,7 +56,7 @@
             <tbody>
             @foreach($post->results as $key => $result)
                 <tr>
-                    <td class="text-center">TK00{{$result->user->id}}</td>
+                    <td class="text-center">{{$result->user->id}}</td>
                     <td>{{$result->user->name}}</td>
                     <td>
                         <ol type="A">
@@ -77,4 +78,4 @@
         </table>
     </div>
 @stop
-@endsection
+@stop

@@ -6,7 +6,7 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Danh sách tài khoản: </h1>
+    <h1>Danh sách tài khoản</h1>
 @stop
 
 @section('content')
@@ -51,7 +51,7 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td class="text-center">TK00{{$user->id}}</td>
+                    <td class="text-center">{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td class="text-center">{{$user->phone}}</td>

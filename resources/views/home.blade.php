@@ -5,7 +5,6 @@
         <div class="box">
             <div class="box-header">
                 <h2>Danh sách bài khảo sát mới nhất</h2>
-                <a href="#">Xem thêm >></a>
             </div>
             <div class="box-content">
                 <ul>
@@ -20,7 +19,6 @@
             <div class="box mt-2">
                 <div class="box-header">
                     <h2>Danh sách bài đã khảo sát</h2>
-                    <a href="#">Xem thêm >></a>
                 </div>
                 <div class="box-content">
                     <ul>
@@ -36,7 +34,6 @@
             <div class="box mt-2">
                 <div class="box-header">
                     <h2>Danh sách bài khảo sát cho sinh viên</h2>
-                    <a href="#">Xem thêm >></a>
                 </div>
                 <div class="box-content">
                     <ul>
@@ -52,7 +49,6 @@
             <div class="box mt-2">
                 <div class="box-header">
                     <h2>Danh sách bài khảo sát cho giảng viên</h2>
-                    <a href="#">Xem thêm >></a>
                 </div>
                 <div class="box-content">
                     <ul>
@@ -68,7 +64,6 @@
             <div class="box mt-2">
                 <div class="box-header">
                     <h2>Danh sách bài khảo sát cho doanh nghiệp</h2>
-                    <a href="#">Xem thêm >></a>
                 </div>
                 <div class="box-content">
                     <ul>

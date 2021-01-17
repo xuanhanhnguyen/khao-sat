@@ -4,7 +4,7 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Sửa thông tin bài khảo sát: </h1>
+    <h1>Sửa thông tin bài khảo sát</h1>
 @stop
 
 @section('content')
@@ -40,28 +40,21 @@
                 <label for="respondent" class="{{ $errors->has('respondent') ? 'is-invalid' : '' }}">
                     Đối tượng khảo sát:</label>
                 <div class="row text-center px-2">
-                    <div class="form-check col-md-3">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="respondent[]" id=""
-                                   value="Admin" {{array_search('Admin', explode(',', $post->respondent)) !== false ? 'checked':''}}>
-                            Admin
-                        </label>
-                    </div>
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" id=""
                                    value="Sinh viên" {{array_search('Sinh viên', explode(',', $post->respondent)) !== false ? 'checked':''}}>
                             Sinh viên
                         </label>
                     </div>
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" id=""
                                    value="Giảng viên" {{array_search('Giảng viên', explode(',', $post->respondent)) !== false ? 'checked':''}}>
                             Giảng viên
                         </label>
                     </div>
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" value="Doanh nghiệp"
                                     {{array_search('Doanh nghiệp', explode(',', $post->respondent)) !== false ? 'checked':''}}>

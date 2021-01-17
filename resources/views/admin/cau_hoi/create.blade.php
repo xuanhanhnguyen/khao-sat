@@ -4,7 +4,7 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Thêm câu hỏi: </h1>
+    <h1>Thêm câu hỏi</h1>
 @stop
 
 @section('content')
@@ -25,6 +25,8 @@
 
             <div class="answers {{ $errors->has('answers') ? 'is-invalid' : '' }}">
                 <label for="answers">Câu trả lời:</label>
+                <input type="text" name="post_id" value="{{$_GET['post']}}"
+                       class="form-control d-none">
                 <ol type="A" id="answers">
                     <li class="mb-2">
                         <input type="text" name="answers[]" value="{{ old('answers') }}"

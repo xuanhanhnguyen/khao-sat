@@ -6,10 +6,11 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Danh sách câu hỏi: </h1>
+    <h1>Danh sách câu hỏi</h1>
 @stop
 
 @section('content')
+    @php($color = ['primary', 'success', 'warning', 'danger', 'primary', 'success', 'warning', 'danger'])
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $err)
@@ -48,7 +49,8 @@
                 <th class="text-center">Câu trả lời</th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center">
-                    <button onclick="location.href = '/dashboard/cau-hoi/create'" class="btn btn-success btn-sm">
+                    <button onclick="location.href = '/dashboard/cau-hoi/create?post='+$('#post').val()"
+                            class="btn btn-success btn-sm">
                         Thêm
                     </button>
                 </th>
@@ -58,12 +60,12 @@
             <tbody>
             @foreach($questions as $question)
                 <tr>
-                    <td>CH00{{$question->id}}</td>
+                    <td class="text-center">{{$question->id}}</td>
                     <td>{{$question->content}}</td>
                     <td>
                         <ol type="A">
-                            @foreach(explode(',', $question->answers) as $item)
-                                <li>{{$item}}</li>
+                            @foreach(explode(',', $question->answers) as $key=>$item)
+                                <li><span class="badge badge-{{$color[$key]}}">{{$item}}</span></li>
                             @endforeach
                         </ol>
                     </td>
@@ -75,7 +77,8 @@
                     </td>
                     <td class="d-flex justify-content-center">
                         <button class="btn btn-sm btn-warning"
-                                onclick="location.href = '/dashboard/cau-hoi/{{$question->id}}'">Sửa
+                                onclick="location.href = '/dashboard/cau-hoi/{{$question->id}}?post='+$('#post').val()">
+                            Sửa
                         </button>
                         <form class="ml-1" action="{{route('cau-hoi.destroy', $question->id)}}" method="post"
                               onsubmit="return confirm('Đồng ý xoá?');">

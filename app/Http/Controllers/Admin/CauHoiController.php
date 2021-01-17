@@ -19,9 +19,9 @@ class CauHoiController extends Controller
         $s = \request()->s;
         $posts = Post::orderByDesc('created_at')->get();
         if (sizeof($posts) > 0)
-            $questions = Question::where('post_id', $s ?? $posts[0]->id)->paginate(10);
+            $questions = Question::where('post_id', $s ?? $posts[0]->id)->get();
         else
-            $questions = Question::paginate(10);
+            $questions = Question::get(10);
 
         return view('admin.cau_hoi.index', compact('posts', 'questions'));
     }
@@ -50,12 +50,11 @@ class CauHoiController extends Controller
         ]);
 
         $data = collect($request->all())->merge([
-            'post_id' => 2,
             'answers' => implode(",", array_diff($request->answers, [null])),
         ])->toArray();
 
         Question::create($data);
-        return redirect(route('cau-hoi.index'))->with(['message' => 'Thêm câu hỏi thành công.']);
+        return redirect('dashboard/cau-hoi?s=' . $request->post_id)->with(['message' => 'Thêm câu hỏi thành công.']);
     }
 
     /**
@@ -100,7 +99,7 @@ class CauHoiController extends Controller
         ])->toArray();
 
         Question::findOrFail($id)->update($data);
-        return redirect(route('cau-hoi.index'))->with(['message' => 'Cập nhật câu hỏi thành công.']);
+        return redirect('dashboard/cau-hoi?s=' . $request->post_id)->with(['message' => 'Cập nhật câu hỏi thành công.']);
     }
 
     /**

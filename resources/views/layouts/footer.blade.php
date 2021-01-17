@@ -1,1 +1,1 @@
-<p class="text-center">copyright © 2020</p>
+<p class="text-center">Copyright © 2020</p>

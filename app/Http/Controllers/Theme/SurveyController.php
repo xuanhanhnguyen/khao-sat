@@ -33,6 +33,7 @@ class SurveyController extends Controller
         unset($result['_token']);
         unset($result['post_id']);
         unset($result['user_id']);
+        unset($result['slug']);
 
         $data['results'] = json_encode($result);
 

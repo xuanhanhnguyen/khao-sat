@@ -12,7 +12,7 @@ class KhaoSatController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')->orderByDesc('created_at')->paginate(10);
+        $posts = Post::with('user')->orderByDesc('created_at')->get();
         return view('admin.khao_sat.index', compact('posts'));
     }
 
