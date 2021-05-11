@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class KetQuaController extends Controller
 {
@@ -11,6 +12,7 @@ class KetQuaController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +20,12 @@ class KetQuaController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('results')->get();
+        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+            $posts = Post::with('results')->get();
+        } else {
+            $posts = Post::with('results')->where('author', Auth::id())->get();
+        }
+
         foreach ($posts as $key => $post) {
             $results = [0, 0, 0, 0];
             if (sizeof($post->results) > 0) {
@@ -33,6 +40,7 @@ class KetQuaController extends Controller
                 unset($posts[$key]);
             }
         }
+
         return view('admin.ket_qua.index', compact('posts'));
     }
 

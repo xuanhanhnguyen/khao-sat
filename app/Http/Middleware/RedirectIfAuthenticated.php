@@ -23,14 +23,12 @@ class RedirectIfAuthenticated
                 Auth::logout();
                 return redirect(route('login'));
             }
-            else if(Auth::user()->role_id == 1) {
-                return $next($request);
-            }else{
+            else if(Auth::user()->role_id == 2) {
                 return redirect(RouteServiceProvider::HOME);
+            }else{
+                return $next($request);
             }
         }
-
-        
 
         return $next($request);
     }

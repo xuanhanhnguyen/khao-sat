@@ -149,6 +149,7 @@ return [
     'attributes' => [
         'password' => 'Mật khẩu',
         'email' => 'Email',
+        'name' => 'Tên'
     ],
 
 ];

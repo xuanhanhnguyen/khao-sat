@@ -16,7 +16,11 @@ class KhaoSatController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')->orderByDesc('created_at')->get();
+        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+            $posts = Post::with('user')->orderByDesc('created_at')->get();
+        } else {
+            $posts = Post::with('user')->where('author', Auth::id())->orderByDesc('created_at')->get();
+        }
         return view('admin.khao_sat.index', compact('posts'));
     }
 

@@ -14,6 +14,11 @@ class Post extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function checkQuestions()
+    {
+        return $this->questions()->where('status', 1);
+    }
+
     public function results()
     {
         return $this->hasMany(Result::class);

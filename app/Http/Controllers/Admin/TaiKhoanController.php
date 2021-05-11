@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class TaiKhoanController extends Controller
@@ -13,6 +14,7 @@ class TaiKhoanController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +22,11 @@ class TaiKhoanController extends Controller
      */
     public function index()
     {
-        $users = User::with('role')->get();
+        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+            $users = User::with('role')->get();
+        } else {
+            return $this->show(Auth::id());
+        }
         return view('admin.users.index', compact('users'));
     }
 

@@ -17,8 +17,28 @@ class SurveyController extends Controller
 
     public function index(Request $request, $slug)
     {
-        $post = Post::with('questions')->where([['slug', $slug], ['status', 1]])->first();
+        $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1]])->first();
         if (is_null($post)) return redirect('/');
+        $post->questions = $post->checkQuestions;
+        foreach ($post->questions as $question) {
+            $results = [0, 0, 0, 0];
+            foreach ($post->results as $result) {
+                $arr = json_decode($result->results, true);
+                $results[$arr['_' . $question->id]] = isset($results[$arr['_' . $question->id]]) ? ++$results[$arr['_' . $question->id]] : 1;
+            }
+            $question->result = $results;
+        }
+
+        $results = [0, 0, 0, 0];
+        foreach ($post->results as $result) {
+            $arr = array_values(json_decode($result->results, true));
+            foreach ($arr as $value) {
+                $results[$value] = isset($results[$value]) ? ++$results[$value] : 1;
+            }
+        }
+
+        $post->result = $results;
+
         return view('survey', compact('post'));
     }
 

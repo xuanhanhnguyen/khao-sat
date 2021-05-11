@@ -15,14 +15,14 @@ class HomeController extends Controller
     public function index()
     {
         if (!Auth::check() || Auth::user()->role_id == 1) {
-            $post_new = Post::where([
+            $post_new = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)
                 ->get();
 
-            $post_student = Post::where([
+            $post_student = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
                 ['respondent', 'like', '%' . Role::find(2)->name . '%']
             ])
@@ -30,7 +30,7 @@ class HomeController extends Controller
                 ->limit(10)
                 ->get();
 
-            $post_teacher = Post::where([
+            $post_teacher = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
                 ['respondent', 'like', '%' . Role::find(3)->name . '%']
             ])
@@ -38,7 +38,7 @@ class HomeController extends Controller
                 ->limit(10)
                 ->get();
 
-            $post_enterprise = Post::where([
+            $post_enterprise = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
                 ['respondent', 'like', '%' . Role::find(4)->name . '%']
             ])
@@ -48,7 +48,7 @@ class HomeController extends Controller
 
             return view('home', compact('post_new', 'post_student', 'post_teacher', 'post_enterprise'));
         } else {
-            $post_new = Post::where([
+            $post_new = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
                 ['respondent', 'like', '%' . Role::find(Auth::user()->role_id)->name . '%']
             ])

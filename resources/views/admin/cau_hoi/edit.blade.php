@@ -59,8 +59,8 @@
             <div class="form-group">
                 <label for="status">Trạng thái:</label>
                 <select name="status" id="status" class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}">
-                    <option value="1">Hiển thị</option>
-                    <option value="0">Ẩn</option>
+                    <option @if($question->status == 1) selected @endif value="1">Hiển thị</option>
+                    <option @if($question->status == 0) selected @endif value="0">Ẩn</option>
                 </select>
                 @if($errors->has('status'))
                     <div class="invalid-feedback">

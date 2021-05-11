@@ -10,7 +10,13 @@
 @section('content')
     <main id="register">
         <section class="register">
-            <h2 class="text-center font-weight-bold">Sửa tài khoản</h2>
+            <h2 class="text-center font-weight-bold">
+                @if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin")
+                    Sửa tài khoản
+                @else
+                    Hồ sơ
+                @endif
+            </h2>
             <form action="{{route('tai-khoan.update', $user->id)}}" method="post">
                 @method('PUT')
                 {{ csrf_field() }}
@@ -87,36 +93,37 @@
                         @endif
                     </div>
                 </div>
-
-                {{-- role field --}}
-                <div class="input-group mb-3">
-                    <select name="role_id" class="form-control">
-                        <option {{$user->role_id == 1 ? 'selected':''}} value="1">Admin</option>
-                        <option {{$user->role_id == 2 ? 'selected':''}} value="2">Sinh viên</option>
-                        <option {{$user->role_id == 3 ? 'selected':''}} value="3">Giảng viên</option>
-                        <option {{$user->role_id == 4 ? 'selected':''}} value="4">Doanh nghiệp</option>
-                    </select>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-users-cog"></span>
+                @if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin")
+                    {{-- role field --}}
+                    <div class="input-group mb-3">
+                        <select name="role_id" class="form-control">
+                            <option {{$user->role_id == 1 ? 'selected':''}} value="1">Admin</option>
+                            <option {{$user->role_id == 2 ? 'selected':''}} value="2">Sinh viên</option>
+                            <option {{$user->role_id == 3 ? 'selected':''}} value="3">Giảng viên</option>
+                            <option {{$user->role_id == 4 ? 'selected':''}} value="4">Doanh nghiệp</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-users-cog"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {{-- status field --}}
-                <div class="input-group mb-3">
-                    <select name="status" class="form-control">
-                        <option {{$user->status == 1 ? 'selected':''}} value="1">Kích hoạt</option>
-                        <option {{$user->status == 0 ? 'selected':''}} value="0">Bỏ kích hoạt</option>
-                    </select>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user-check"></span>
+                    {{-- status field --}}
+                    <div class="input-group mb-3">
+                        <select name="status" class="form-control">
+                            <option {{$user->status == 1 ? 'selected':''}} value="1">Kích hoạt</option>
+                            <option {{$user->status == 0 ? 'selected':''}} value="0">Bỏ kích hoạt</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-check"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
-                {{-- Register button --}}
+                {{-- Update button --}}
                 <button type="submit"
                         class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-user-plus"></span>

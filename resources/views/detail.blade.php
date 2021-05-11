@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
+    @php($color = ['primary', 'success', 'warning', 'danger', 'primary', 'success', 'warning', 'danger'])
+
     <section class="main container">
         <div class="box box-detail">
             <div class="box-header">
@@ -18,6 +20,17 @@
                     </form>
                 @else
                     <p class="text-center text-success font-weight-bold">Đã thực hiện khảo sát.</p>
+
+                    <ol type="A" class="d-flex justify-content-center align-content-center">
+                        @foreach($post->result as $key => $value)
+                            <li class="mx-4">
+                            <span class="badge badge-{{$color[$key]}}">
+                                {{sizeof($post->results) > 0 ? round($value/($post->questions()->count()*sizeof($post->results)) * 100, 2): 0}}
+                                %
+                            </span>
+                            </li>
+                        @endforeach
+                    </ol>
                 @endif
             </div>
 
@@ -36,6 +49,10 @@
                                                    name="_{{$question->id}}"
                                                    @if(isset($result["_" . $question->id]) && $result["_" . $question->id] == $key)checked @else disabled @endif
                                             >
+                                            <span class="badge badge-{{$color[$key]}}">
+                                                {{array_sum($question->result) > 0 ? round($question->result[$key]/array_sum($question->result) * 100, 2) : 0}}
+                                                %
+                                            </span>
                                             <label for="{{'answers'.$question->id.'_'.$key}}">{{$answer}}</label>
                                         </li>
                                     @endforeach

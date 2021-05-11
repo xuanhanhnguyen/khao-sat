@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CauHoiController extends Controller
 {
@@ -14,6 +15,7 @@ class CauHoiController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,11 +24,18 @@ class CauHoiController extends Controller
     public function index()
     {
         $s = \request()->s;
-        $posts = Post::orderByDesc('created_at')->get();
-        if (sizeof($posts) > 0)
-            $questions = Question::where('post_id', $s ?? $posts[0]->id)->get();
-        else
-            $questions = Question::get(10);
+
+        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+            $posts = Post::orderByDesc('created_at')->get();
+            $questions = sizeof($posts) > 0 ? Question::where('post_id', $s ?? $posts[0]->id)->get() : false;
+        } else {
+            $posts = Post::orderByDesc('created_at')->where('author', Auth::id())->get();
+            $questions = sizeof($posts) > 0 ? Question::where('post_id', $s ?? $posts[0]->id)->get() : false;
+        }
+
+        if (!$questions) {
+            return redirect(route('khao-sat.index'))->with('error', 'Vui lòng thêm bài khảo sát.');
+        }
 
         return view('admin.cau_hoi.index', compact('posts', 'questions'));
     }

@@ -19,11 +19,36 @@ class DetailController extends Controller
     public function index($slug)
     {
         $id = \request()->user_id;
-        $post = Post::with('questions')->where([['slug', $slug], ['status', 1]])->first();
+
+        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1]])->first();
+        } else {
+            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1], ['author', Auth::id()]])->first();
+        }
+
         if (is_null($post)) return redirect('/');
+        $post->questions = $post->checkQuestions;
+        foreach ($post->questions as $question) {
+            $results = [0, 0, 0, 0];
+            foreach ($post->results as $result) {
+                $arr = json_decode($result->results, true);
+                $results[$arr['_' . $question->id]] = isset($results[$arr['_' . $question->id]]) ? ++$results[$arr['_' . $question->id]] : 1;
+            }
+            $question->result = $results;
+        }
+
+        $results = [0, 0, 0, 0];
+        foreach ($post->results as $result) {
+            $arr = array_values(json_decode($result->results, true));
+            foreach ($arr as $value) {
+                $results[$value] = isset($results[$value]) ? ++$results[$value] : 1;
+            }
+        }
+        $post->result = $results;
+
 
         $result = Result::with('post')->where([
-            ['user_id', (Auth::user()->role->name == "Admin" && isset($id)) ? $id : Auth::id()],
+            ['user_id', (Auth::user()->role->name != "Sinh viên" && isset($id)) ? $id : Auth::id()],
             ['post_id', $post->id]
         ])->first();
 

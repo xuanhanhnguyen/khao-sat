@@ -79,9 +79,7 @@ body main#register .register h2 {
 body main .box-header,
 body main .box-footer > div {
   background-color: #2980b9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   padding: 3px 5px;
   border-radius: 5px;
 }
