@@ -44,8 +44,8 @@ class DashboardController extends Controller
                 }
                 $result->result = $count;
             }
-        }
-        $post->result = $results;
+            $post->result = $results;
+        }else $post->result = [];
         return view('admin.dashboard', compact('post'));
     }
 }

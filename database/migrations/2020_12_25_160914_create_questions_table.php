@@ -18,8 +18,6 @@ class CreateQuestionsTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->string('content');
             $table->string('answers');
-            $table->bigInteger('parent_id')->nullable();
-            $table->tinyInteger('type_id')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

@@ -34,7 +34,7 @@
                                                    class="form-check-input"
                                                    type="radio"
                                                    name="_{{$question->id}}"
-                                                   @if($result["_".$question->id] == $key)checked @else disabled @endif
+                                                   @if(isset($result["_" . $question->id]) && $result["_" . $question->id] == $key)checked @else disabled @endif
                                             >
                                             <label for="{{'answers'.$question->id.'_'.$key}}">{{$answer}}</label>
                                         </li>

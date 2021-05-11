@@ -50,7 +50,7 @@ class HomeController extends Controller
         } else {
             $post_new = Post::where([
                 ['status', '=', 1],
-                ['respondent', 'like', '%' . Role::find(Auth::id())->name . '%']
+                ['respondent', 'like', '%' . Role::find(Auth::user()->role_id)->name . '%']
             ])
                 ->orderBy('created_at', 'desc')
                 ->limit(10)

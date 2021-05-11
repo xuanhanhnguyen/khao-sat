@@ -8,7 +8,7 @@
     <title>Khảo sát - Đại học vinh</title>
     <base href="{{asset('')}}">
     <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <link type="text/css" href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet">
     <link type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"

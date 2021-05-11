@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class KhaoSatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -119,12 +123,9 @@ class KhaoSatController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        if ($post->results()->count() <= 0) {
-            $post->questions()->delete();
-            $post->delete();
-            return redirect(route('khao-sat.index'))->with(['message' => 'Xoá bài khảo sát thành công.']);
-        }
-
-        return redirect(route('khao-sat.index'))->with(['error' => 'Đã thực hiện khảo sát, không thế xoá bài khảo sát.']);
+        $post->results()->delete();
+        $post->questions()->delete();
+        $post->delete();
+        return redirect(route('khao-sat.index'))->with(['message' => 'Xoá bài khảo sát thành công.']);
     }
 }

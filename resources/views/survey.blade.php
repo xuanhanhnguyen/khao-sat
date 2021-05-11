@@ -25,7 +25,7 @@
                                             <input value="{{$key}}" id="{{'answers'.$question->id.'_'.$key}}"
                                                    class="form-check-input"
                                                    type="radio"
-                                                   name="_{{$question->id}}">
+                                                   name="_{{$question->id}}" required>
                                             <label for="{{'answers'.$question->id.'_'.$key}}">{{$answer}}</label>
                                         </li>
                                     @endforeach

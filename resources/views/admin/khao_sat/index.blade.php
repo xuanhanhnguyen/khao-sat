@@ -67,7 +67,7 @@
                                 onclick="location.href = '/dashboard/khao-sat/{{$post->id}}'">Sửa
                         </button>
                         <form class="ml-1" action="{{route('khao-sat.destroy', $post->id)}}" method="post"
-                              onsubmit="return confirm('Đồng ý xoá?');">
+                              onsubmit="return confirm('Tất cả các dữ liệu liên quan sẽ bị xóa. Tôi đồng ý?');">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-sm btn-outline-danger">Xoá</button>

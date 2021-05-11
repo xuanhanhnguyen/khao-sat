@@ -23,7 +23,7 @@ class DetailController extends Controller
         if (is_null($post)) return redirect('/');
 
         $result = Result::with('post')->where([
-            ['user_id', (Auth::user()->role == "admin" && isset($id)) ? $id : Auth::id()],
+            ['user_id', (Auth::user()->role->name == "Admin" && isset($id)) ? $id : Auth::id()],
             ['post_id', $post->id]
         ])->first();
 

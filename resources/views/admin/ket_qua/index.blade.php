@@ -52,7 +52,7 @@
                         <ol type="A">
                             @foreach($post->result as $key => $value)
                                 <li>
-                                    <span class="badge badge-{{$color[$key]}}">{{$value/($post->questions()->count()*sizeof($post->results)) * 100}}%</span>
+                                    <span class="badge badge-{{$color[$key]}}">{{round($value/($post->questions()->count()*sizeof($post->results)) * 100, 2)}}%</span>
                                 </li>
                             @endforeach
                         </ol>

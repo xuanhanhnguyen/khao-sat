@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-{{$color[$key]}} text-center p-2">
-                    <h3>{{chr(65+$key)}}. {{$value/($post->questions()->count()*sizeof($post->results)) * 100}}%</h3>
+                    <h3>{{chr(65+$key)}}. {{round($value/($post->questions()->count()*sizeof($post->results)) * 100, 2)}}%</h3>
                 </div>
             </div>
         @endforeach
@@ -61,7 +61,7 @@
                         <ol type="A">
                             @foreach($result->result as $k => $value)
                                 <li>
-                                    <span class="badge badge-{{$color[$k]}}">{{$value/$post->questions()->count() * 100}}%</span>
+                                    <span class="badge badge-{{$color[$k]}}">{{round($value/$post->questions()->count() * 100, 2)}}%</span>
                                 </li>
                             @endforeach
                         </ol>
