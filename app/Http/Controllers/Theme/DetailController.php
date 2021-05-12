@@ -20,11 +20,12 @@ class DetailController extends Controller
     {
         $id = \request()->user_id;
 
-        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
-            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1]])->first();
-        } else {
-            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1], ['author', Auth::id()]])->first();
-        }
+//        if (Auth::user()->role->name == "admin" || Auth::user()->role->name == "Admin") {
+//            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1]])->first();
+//        } else {
+//            $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1], ['author', Auth::id()]])->first();
+//        }
+        $post = Post::has('checkQuestions')->with('checkQuestions', 'results')->where([['slug', $slug], ['status', 1]])->first();
 
         if (is_null($post)) return redirect('/');
         $post->questions = $post->checkQuestions;
