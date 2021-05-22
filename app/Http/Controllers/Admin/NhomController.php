@@ -71,9 +71,10 @@ class NhomController extends Controller
     public function show($id)
     {
         $data = Group::with('join', 'join.user')->find($id);
+        $user_join = array_column(array_column($data->join->toArray(), 'user'), 'id');
         $role = Role::with([])->whereIn('name', explode(",", $data->limit))->get()->toArray();
         $role = array_column($role, 'id');
-        $users = User::whereIn('role_id', $role)->get();
+        $users = User::with([])->whereIn('role_id', $role)->whereNotIn('id', $user_join)->get();
         return view('admin.nhom.view', compact('data', 'users'));
     }
 
