@@ -52,6 +52,7 @@ class NhomController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:groups'],
             'description' => ['nullable', 'string'],
+            'limit' => ['required'],
         ]);
         $data = collect($request->all())->merge([
             'user_id' => Auth::id(),
@@ -99,7 +100,8 @@ class NhomController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string']
+            'description' => ['nullable', 'string'],
+            'limit' => ['required'],
         ]);
         $data = collect($request->all())->merge([
             'limit' => $request->has('limit') ? implode(',', $request->limit) : ""
