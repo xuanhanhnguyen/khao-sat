@@ -25,7 +25,7 @@ class GroupController extends Controller
     {
         $data = Group::has('hasGroup')->get();
 
-        $more = Group::doesntHave('hasGroup')->get();
+        $more = Group::doesntHave('hasGroup')->where(['status', 1])->get();
 
         return view('group', compact('data', 'more'));
     }
