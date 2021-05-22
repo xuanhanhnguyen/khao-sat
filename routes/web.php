@@ -20,6 +20,10 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => '
     Route::resource('cau-hoi', 'CauHoiController');
     Route::resource('ket-qua', 'KetQuaController');
     Route::resource('tai-khoan', 'TaiKhoanController');
+    Route::resource('nhom', 'NhomController');
+    Route::resource('join-group', 'JoinGroupController');
+    Route::get('join-group/{group}/{id}', 'JoinGroupController@pheduyet');
+    Route::post('/nhom/them-thanh-vien/{id}', 'NhomController@addThanhVien')->name('nhom.add');
 });
 
 Route::group(['namespace' => 'Theme'], function () {
@@ -27,4 +31,7 @@ Route::group(['namespace' => 'Theme'], function () {
     Route::get('/{slug}.html', 'DetailController@index')->name('detail');
     Route::post('/{slug}.html', 'SurveyController@index')->name('survey');
     Route::post('/save', 'SurveyController@save')->name('save');
+    Route::get('/nhom', 'GroupController@index')->name('nhom');
+    Route::get('/nhom/{id}', 'GroupController@show')->name('nhom.detail');
+    Route::post('/nhom/{id}', 'GroupController@join')->name('nhom.join');
 });

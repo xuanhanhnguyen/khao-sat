@@ -16,6 +16,7 @@
         <li><i class="fas fa-user"></i> {{Auth::user()->name}}</li>
     @endif
     <li><a href="/">Trang chủ</a></li>
+    <li><a href="/nhom">Nhóm</a></li>
     @if (Auth::check())
         <li>
 

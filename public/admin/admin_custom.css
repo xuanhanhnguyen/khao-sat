@@ -46,3 +46,7 @@ body main#register .register h2 {
     text-align: center;
     text-transform: uppercase;
 }
+
+.select2 {
+    width: 100% !important;
+}

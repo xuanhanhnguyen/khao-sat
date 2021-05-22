@@ -41,4 +41,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author', 'id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'join_group', 'user_id ');
+    }
 }

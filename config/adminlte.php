@@ -279,14 +279,28 @@ return [
             'text' => 'Bài khảo sát',
             'icon' => 'fas fa-fw fa-book-reader',
             'url' => '/dashboard/khao-sat',
-        ],
-        [
+        ], [
             'text' => 'Quản lý câu hỏi',
             'icon' => 'fas fa-fw fa-question',
             'url' => '/dashboard/cau-hoi',
-        ]
-        ,
-        [
+        ], [
+            'text' => 'Nhóm khảo sát',
+            'icon' => 'fas fa-fw fa-poll',
+            'url' => '/dashboard/nhom',
+            'submenu' => [
+                [
+                    "text" => "Tạo nhóm mới",
+                    "url" => '/dashboard/nhom/create',
+                    'icon_color' => 'red',
+                ],
+                [
+                    "text" => "Danh sách nhóm",
+                    "url" => '/dashboard/nhom',
+                    'icon_color' => 'red',
+                ]
+
+            ]
+        ], [
             'text' => 'Kết quả khảo sát',
             'icon' => 'fas fa-fw fa-poll',
             'url' => '/dashboard/ket-qua',

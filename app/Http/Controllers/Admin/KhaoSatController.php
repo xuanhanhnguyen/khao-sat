@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,8 @@ class KhaoSatController extends Controller
      */
     public function create()
     {
-        return view('admin.khao_sat.create');
+        $groups = Group::with('users')->get();
+        return view('admin.khao_sat.create', compact('groups'));
     }
 
     /**
@@ -52,7 +54,11 @@ class KhaoSatController extends Controller
             'author' => Auth::id()
         ])->toArray();
 
-        Post::create($data);
+        $post = Post::create($data);
+        if ($request->has('respondent') && array_search('Nhóm', $request->respondent) !== false && $request->has('nhom')) {
+            Post::find($post->id)->groups()->sync($request->nhom);
+        }
+
         return redirect(route('khao-sat.index'))->with(['message' => 'Thêm bài khảo sát thành công.']);
     }
 
@@ -79,8 +85,9 @@ class KhaoSatController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return view('admin.khao_sat.edit', compact('post'));
+        $post = Post::with('groups')->findOrFail($id);
+        $groups = Group::all();
+        return view('admin.khao_sat.edit', compact('post', 'groups'));
     }
 
     /**
@@ -115,6 +122,13 @@ class KhaoSatController extends Controller
         ])->toArray();
 
         Post::findOrFail($id)->update($data);
+
+        if ($request->has('respondent') && array_search('Nhóm', $request->respondent) !== false && $request->has('nhom')) {
+            Post::find($id)->groups()->sync($request->nhom);
+        }else{
+            Post::find($id)->groups()->detach();
+        }
+
         return redirect(route('khao-sat.index'))->with(['message' => 'Sửa thông tin bài khảo sát thành công.']);
     }
 
@@ -129,6 +143,7 @@ class KhaoSatController extends Controller
         $post = Post::findOrFail($id);
         $post->results()->delete();
         $post->questions()->delete();
+        $post->groups()->detach();
         $post->delete();
         return redirect(route('khao-sat.index'))->with(['message' => 'Xoá bài khảo sát thành công.']);
     }

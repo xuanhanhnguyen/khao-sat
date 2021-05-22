@@ -40,31 +40,54 @@
                 <label for="respondent" class="{{ $errors->has('respondent') ? 'is-invalid' : '' }}">
                     Đối tượng khảo sát:</label>
                 <div class="row text-center px-2">
-                    <div class="form-check col-md-4">
+                    <div class="form-check col-md-3">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" id=""
                                    value="Sinh viên" {{array_search('Sinh viên', explode(',', $post->respondent)) !== false ? 'checked':''}}>
                             Sinh viên
                         </label>
                     </div>
-                    <div class="form-check col-md-4">
+                    <div class="form-check col-md-3">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" id=""
                                    value="Giảng viên" {{array_search('Giảng viên', explode(',', $post->respondent)) !== false ? 'checked':''}}>
                             Giảng viên
                         </label>
                     </div>
-                    <div class="form-check col-md-4">
+                    <div class="form-check col-md-3">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" name="respondent[]" value="Doanh nghiệp"
                                     {{array_search('Doanh nghiệp', explode(',', $post->respondent)) !== false ? 'checked':''}}>
                             Doanh nghiệp
                         </label>
                     </div>
+
+                    <label class="form-check-label col-md-3">
+                        <input onchange="$('#group').toggle()" type="checkbox" class="form-check-input"
+                               {{array_search('Nhóm', explode(',', $post->respondent)) !== false ? 'checked':''}}
+                               name="respondent[]" id="" value="Nhóm">
+                        Nhóm khảo sát
+                    </label>
                 </div>
                 @if($errors->has('respondent'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('respondent') }}</strong>
+                    </div>
+                @endif
+            </div>
+            {{--group--}}
+            <div class="form-group" id="group"
+                 style="display: {{array_search('Nhóm', explode(',', $post->respondent)) !== false ? 'block':'none'}}">
+                <label for="respondent" class="{{ $errors->has('nhom') ? 'is-invalid' : '' }}">
+                    Chọn nhóm khảo sát:</label>
+                <select id="select2" class="select2 w-100" name="nhom[]" multiple="multiple">
+                    @foreach($groups as $group)
+                        <option {{array_search($group->id, array_column($post->groups->toArray(),'id')) !== false ? 'selected':''}} value="<?php echo $group->id ?>"><?php echo $group->name ?></option>
+                    @endforeach
+                </select>
+                @if($errors->has('nhom'))
+                    <div class="invalid-feedback">
+                        <strong>{{ $errors->first('nhom') }}</strong>
                     </div>
                 @endif
             </div>

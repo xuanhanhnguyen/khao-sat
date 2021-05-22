@@ -46,18 +46,23 @@ class TaiKhoanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+        try {
 
-        $data = collect($request->all())->merge([
-            'password' => Hash::make($request->password),
-        ])->toArray();
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:6', 'confirmed'],
+            ]);
 
-        User::create($data);
-        return redirect(route('tai-khoan.index'))->with(['message' => "Thêm tài khoản thành công"]);
+            $data = collect($request->all())->merge([
+                'password' => Hash::make($request->password),
+            ])->toArray();
+
+            User::create($data);
+            return redirect(route('tai-khoan.index'))->with(['message' => "Thêm tài khoản thành công"]);
+        } catch (\Exception $e) {
+            return redirect(route('tai-khoan.index'))->with(['error' => 'Thêm mới thất bại, vui lòng kiểm tra lại.']);
+        }
     }
 
     /**
@@ -90,25 +95,30 @@ class TaiKhoanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (isset($request->password)) {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'password' => ['required', 'string', 'min:6', 'confirmed'],
-            ]);
+        try {
 
-            $data = collect($request->all())->merge([
-                'password' => Hash::make($request->password),
-            ])->toArray();
+            if (isset($request->password)) {
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'password' => ['required', 'string', 'min:6', 'confirmed'],
+                ]);
 
-            User::findOrFail($id)->update($data);
-        } else {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255']
-            ]);
+                $data = collect($request->all())->merge([
+                    'password' => Hash::make($request->password),
+                ])->toArray();
 
-            User::findOrFail($id)->update(['name' => $request->name, 'role_id' => $request->role_id, 'status' => $request->status]);
+                User::findOrFail($id)->update($data);
+            } else {
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255']
+                ]);
+
+                User::findOrFail($id)->update(['name' => $request->name, 'role_id' => $request->role_id, 'status' => $request->status]);
+            }
+            return redirect(route('tai-khoan.index'))->with(['message' => "Cập nhật tài khoản thành công"]);
+        } catch (\Exception $e) {
+            return redirect(route('tai-khoan.index'))->with(['error' => 'Cập nhật thất bại, vui lòng kiểm tra lại.']);
         }
-        return redirect(route('tai-khoan.index'))->with(['message' => "Cập nhật tài khoản thành công"]);
     }
 
     /**
@@ -119,7 +129,18 @@ class TaiKhoanController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
-        return redirect(route('tai-khoan.index'))->with(['message' => "Xoá tài khoản thành công"]);
+        try {
+
+            $user = User::findOrFail($id);
+            if ($user->results->count() > 0 || $user->posts->count() > 0) {
+                return redirect(route('tai-khoan.index'))->with(['error' => "Thất bại, tài khoản đang chứa dữ liệu khảo sát."]);
+            }
+
+            $user->delete();
+            return redirect(route('tai-khoan.index'))->with(['message' => "Xoá tài khoản thành công"]);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => 'Xóa thất bại, vui lòng kiểm tra lại.']);
+        }
     }
 }

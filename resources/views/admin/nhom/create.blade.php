@@ -4,21 +4,41 @@
 @section('title', 'Khảo sát - Đại học vinh')
 
 @section('content_header')
-    <h1>Thêm bài khảo sát</h1>
+    <h1>Thêm nhóm khảo sát mới</h1>
 @stop
 
 @section('content')
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $err)
+                {{$err}}<br>
+            @endforeach
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('message'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> Thông báo</h4>
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="callout-top callout-top-danger col-md-12">
-        <form action="{{route('khao-sat.store')}}" method="post">
+        <form action="{{route('nhom.store')}}" method="post">
             {{ csrf_field() }}
-            {{--title--}}
+            {{--name--}}
             <div class="form-group">
-                <label for="title">Tiêu đề:</label>
-                <input type="text" name="title" id="title" value="{{ old('title') }}"
-                       class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" required>
-                @if($errors->has('title'))
+                <label for="name">Tên nhóm:</label>
+                <input type="text" name="name" id="name" value="{{ old('name') }}"
+                       class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required>
+                @if($errors->has('name'))
                     <div class="invalid-feedback">
-                        <strong>{{ $errors->first('title') }}</strong>
+                        <strong>{{ $errors->first('name') }}</strong>
                     </div>
                 @endif
             </div>
@@ -34,67 +54,43 @@
                     </div>
                 @endif
             </div>
-
             {{--respondent--}}
             <div class="form-group">
-                <label for="respondent" class="{{ $errors->has('respondent') ? 'is-invalid' : '' }}">
-                    Đối tượng khảo sát:</label>
+                <label for="limit" class="{{ $errors->has('limit') ? 'is-invalid' : '' }}">
+                    Giới hạn thành viên:</label>
                 <div class="row text-center px-2">
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="respondent[]" id="" value="Sinh viên">
+                            <input type="checkbox" class="form-check-input" name="limit[]" id="" value="Sinh viên">
                             Sinh viên
                         </label>
                     </div>
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="respondent[]" id=""
+                            <input type="checkbox" class="form-check-input" name="limit[]" id=""
                                    value="Giảng viên">
                             Giảng viên
                         </label>
                     </div>
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-4">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="respondent[]" value="Doanh nghiệp">
+                            <input type="checkbox" class="form-check-input" name="limit[]" value="Doanh nghiệp">
                             Doanh nghiệp
                         </label>
                     </div>
-                    <label class="form-check-label col-md-3">
-                        <input onchange="$('#group').toggle()" type="checkbox" class="form-check-input"
-                               name="respondent[]" id="" value="Nhóm">
-                        Nhóm khảo sát
-                    </label>
                 </div>
-                @if($errors->has('respondent'))
+                @if($errors->has('limit'))
                     <div class="invalid-feedback">
-                        <strong>{{ $errors->first('respondent') }}</strong>
+                        <strong>{{ $errors->first('limit') }}</strong>
                     </div>
                 @endif
             </div>
             {{--status--}}
-
-            {{--group--}}
-            <div class="form-group" id="group" style="display: none">
-                <label for="respondent" class="{{ $errors->has('nhom') ? 'is-invalid' : '' }}">
-                    Chọn nhóm khảo sát:</label>
-                <select id="select2" class="select2 w-100" name="nhom[]" multiple="multiple">
-                    @foreach($groups as $group)
-                        <option value="<?php echo $group->id ?>"><?php echo $group->name ?></option>
-                    @endforeach
-                </select>
-                @if($errors->has('nhom'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('nhom') }}</strong>
-                    </div>
-                @endif
-            </div>
-            {{--status--}}
-
             <div class="form-group">
                 <label for="status">Trạng thái:</label>
                 <select name="status" id="status" class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}">
-                    <option value="1">Hiển thị</option>
-                    <option value="0">Ẩn</option>
+                    <option value="1">Công khai</option>
+                    <option value="0">Nhóm kín</option>
                 </select>
                 @if($errors->has('status'))
                     <div class="invalid-feedback">
