@@ -4,6 +4,7 @@ body {
   padding-bottom: 100px;
   font-family: Muli, Arial, sans-serif;
 }
+
 body h1,
 body h2,
 body h3,
@@ -14,43 +15,63 @@ body p {
   padding: 0;
   margin: 0;
 }
+
 body img {
   max-width: 100%;
   max-height: 100%;
 }
+
 body .clearfix {
   clear: both;
 }
+
 body a {
   text-decoration: none;
 }
+
 body header .header-top {
-  background-color: #2980b9;
+  background-color: #56a4fe;
+  position: relative;
 }
+
+body header .box-user {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #fff;
+  padding: 5px 10px 5px 60px;
+  border-bottom-left-radius: 100px;
+}
+
 body header img {
   width: 100px;
 }
+
 body header ul.menu-right {
   padding: 3px 0;
   list-style: none;
   display: flex;
   float: right;
-  background-color: #2980b9;
+  background-color: #56a4fe;
   border-bottom-left-radius: 10px;
   color: #fff;
   border-top-right-radius: 10px;
   margin-top: 1px;
 }
+
 body header ul.menu-right li {
   padding: 0 10px;
   border-right: 2px solid;
 }
+
 body header ul.menu-right li a {
   color: #fff;
 }
+
 body header ul.menu-right li:last-child {
   border-right: 0;
 }
+
 body main#login,
 body main#register {
   display: flex;
@@ -58,6 +79,7 @@ body main#register {
   align-items: center;
   min-height: 450px;
 }
+
 body main#login .login,
 body main#register .login,
 body main#login .register,
@@ -65,56 +87,68 @@ body main#register .register {
   width: 350px;
   padding: 10px;
   border: 1px solid #ced4da;
-  border-top: 5px solid #2980b9;
+  border-top: 5px solid #56a4fe;
   border-radius: 5px;
 }
+
 body main#login .login h2,
 body main#register .login h2,
 body main#login .register h2,
 body main#register .register h2 {
   font-size: 24px;
-  color: #2980b9;
+  color: #56a4fe;
   margin-bottom: 15px;
 }
+
 body main .box-header,
-body main .box-footer > div {
-  background-color: #2980b9;
-  text-align: center;
-  padding: 3px 5px;
+body main .box-footer>div {
+  background-color: #56a4fe;
+  padding: 5px 15px;
   border-radius: 5px;
 }
+
 body main .box-header h2,
-body main .box-footer > div h2 {
-  font-size: 18px;
+body main .box-footer>div h2 {
+  font-size: 16px;
 }
+
 body main .box-header a,
-body main .box-footer > div a,
+body main .box-footer>div a,
 body main .box-header h2,
-body main .box-footer > div h2 {
+body main .box-footer>div h2 {
   color: white;
 }
+
 body main .box.box-detail .box-header,
-body main .box.box-detail .box-footer > div {
+body main .box.box-detail .box-footer>div {
   justify-content: center;
 }
+
 body main .box-question ol li input {
   margin-right: 20px;
   margin-left: -40px;
 }
+
 body main .box-question ol li label {
   display: initial;
 }
+
 body main .box-footer {
   position: absolute;
   bottom: 65px;
   right: 0;
   left: 0;
 }
+
 body footer {
-  border-top: 5px solid #2980b9;
+  border-top: 5px solid #56a4fe;
   padding: 15px 0;
   position: absolute;
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+.box-content ul {
+  margin-top: 1rem;
 }

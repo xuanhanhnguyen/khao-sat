@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'dashboard',
+    'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => false,
@@ -232,78 +232,22 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Tài khoản',
-            'url' => 'dashboard/tai-khoan',
+            'url' => 'admin/tai-khoan',
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'QUẢN LÝ'],
-//        [
-//            'text' => 'multilevel',
-//            'icon' => 'fas fa-fw fa-share',
-//            'submenu' => [
-//                [
-//                    'text' => 'level_one',
-//                    'url' => '#',
-//                ],
-//                [
-//                    'text' => 'level_one',
-//                    'url' => '#',
-//                    'icon_color' => 'red',
-//                    'submenu' => [
-//                        [
-//                            'text' => 'level_two',
-//                            'url' => '#',
-//                        ],
-//                        [
-//                            'text' => 'level_two',
-//                            'url' => '#',
-//                            'submenu' => [
-//                                [
-//                                    'text' => 'level_three',
-//                                    'url' => '#',
-//                                ],
-//                                [
-//                                    'text' => 'level_three',
-//                                    'url' => '#',
-//                                ],
-//                            ],
-//                        ],
-//                    ],
-//                ],
-//                [
-//                    'text' => 'level_one',
-//                    'url' => '#',
-//                ],
-//            ],
-//        ],
         [
-            'text' => 'Bài khảo sát',
+            'text' => 'Khảo sát',
             'icon' => 'fas fa-fw fa-book-reader',
-            'url' => '/dashboard/khao-sat',
+            'url' => '/admin/khao-sat',
         ], [
-            'text' => 'Quản lý câu hỏi',
+            'text' => 'Câu hỏi',
             'icon' => 'fas fa-fw fa-question',
-            'url' => '/dashboard/cau-hoi',
-        ], [
-            'text' => 'Nhóm khảo sát',
-            'icon' => 'fas fa-fw fa-poll',
-            'url' => '/dashboard/nhom',
-            'submenu' => [
-                [
-                    "text" => "Tạo nhóm mới",
-                    "url" => '/dashboard/nhom/create',
-                    'icon_color' => 'red',
-                ],
-                [
-                    "text" => "Danh sách nhóm",
-                    "url" => '/dashboard/nhom',
-                    'icon_color' => 'red',
-                ]
-
-            ]
+            'url' => '/admin/cau-hoi',
         ], [
             'text' => 'Kết quả khảo sát',
             'icon' => 'fas fa-fw fa-poll',
-            'url' => '/dashboard/ket-qua',
+            'url' => '/admin/ket-qua',
         ]
     ],
 

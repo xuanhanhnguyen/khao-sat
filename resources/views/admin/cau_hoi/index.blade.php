@@ -49,7 +49,7 @@
                 <th class="text-center">Câu trả lời</th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center">
-                    <button onclick="location.href = '/dashboard/cau-hoi/create?post='+$('#post').val()"
+                    <button onclick="location.href = '/admin/cau-hoi/create?post='+$('#post').val()"
                             class="btn btn-success btn-sm">
                         Thêm
                     </button>
@@ -77,7 +77,7 @@
                     </td>
                     <td class="d-flex justify-content-center">
                         <button class="btn btn-sm btn-warning"
-                                onclick="location.href = '/dashboard/cau-hoi/{{$question->id}}?post='+$('#post').val()">
+                                onclick="location.href = '/admin/cau-hoi/{{$question->id}}?post='+$('#post').val()">
                             Sửa
                         </button>
                         <form class="ml-1" action="{{route('cau-hoi.destroy', $question->id)}}" method="post"

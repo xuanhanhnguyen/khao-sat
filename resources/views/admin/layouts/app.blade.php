@@ -3,7 +3,7 @@
 @yield('main')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('/admin/admin_custom.css')}}">
+    <link rel="stylesheet" href="{{asset('/_admin/admin_custom.css')}}">
     @yield('css')
 @stop
 

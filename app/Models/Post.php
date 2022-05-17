@@ -28,9 +28,4 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'author', 'id');
     }
-
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class, 'post_group', 'post_id');
-    }
 }

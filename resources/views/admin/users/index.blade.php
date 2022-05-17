@@ -42,7 +42,7 @@
                 <th class="text-center">Chức vụ</th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center">
-                    <button onclick="location.href = '/dashboard/tai-khoan/create'" class="btn btn-success btn-sm">
+                    <button onclick="location.href = '/admin/tai-khoan/create'" class="btn btn-success btn-sm">
                         Thêm
                     </button>
                 </th>
@@ -64,7 +64,7 @@
                     </td>
                     <td class="d-flex justify-content-center">
                         <button class="btn btn-sm btn-warning"
-                                onclick="location.href = '/dashboard/tai-khoan/{{$user->id}}'">Sửa
+                                onclick="location.href = '/admin/tai-khoan/{{$user->id}}'">Sửa
                         </button>
                         <form class="ml-1" action="{{route('tai-khoan.destroy', $user->id)}}" method="post"
                               onsubmit="return confirm('Đồng ý xoá?');" >

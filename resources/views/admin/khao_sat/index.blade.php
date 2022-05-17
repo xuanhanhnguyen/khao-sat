@@ -42,7 +42,7 @@
                 <th class="text-center">Tác giả</th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center">
-                    <button onclick="location.href = '/dashboard/khao-sat/create'" class="btn btn-success btn-sm">
+                    <button onclick="location.href = '/admin/khao-sat/create'" class="btn btn-success btn-sm">
                         Thêm
                     </button>
                 </th>
@@ -64,7 +64,7 @@
                     </td>
                     <td class="d-flex justify-content-center">
                         <button class="btn btn-sm btn-warning"
-                                onclick="location.href = '/dashboard/khao-sat/{{$post->id}}'">Sửa
+                                onclick="location.href = '/admin/khao-sat/{{$post->id}}'">Sửa
                         </button>
                         <form class="ml-1" action="{{route('khao-sat.destroy', $post->id)}}" method="post"
                               onsubmit="return confirm('Tất cả các dữ liệu liên quan sẽ bị xóa. Tôi đồng ý?');">

@@ -4,71 +4,29 @@
     <section class="main container">
         <div class="box">
             <div class="box-header">
-                <h2>Danh sách bài khảo sát mới nhất</h2>
+                <h2>Khảo sát ngay</h2>
             </div>
             <div class="box-content">
-                <ul>
-                    @foreach($post_new as $post)
-                        <li><a href="{{route('detail', $post->slug)}}">{{$post->title}}</a></li>
+                <ul class="list-unstyled pl-3">
+                    @foreach ($post_new as $post)
+                        <li><i class="fas fa-arrow-right"></i> <a
+                                href="{{ route('detail', $post->slug) }}">{{ $post->title }}</a></li>
                     @endforeach
                 </ul>
             </div>
         </div>
 
-        @if(isset($post_result))
+        @if (isset($post_result))
             <div class="box mt-2">
                 <div class="box-header">
-                    <h2>Danh sách bài đã khảo sát</h2>
+                    <h2>Đã khảo sát</h2>
                 </div>
                 <div class="box-content">
-                    <ul>
-                        @foreach($post_result as $result)
-                            <li><a href="{{route('detail', $result->post->slug)}}">{{$result->post->title}}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        @endif
-
-        @if(isset($post_student))
-            <div class="box mt-2">
-                <div class="box-header">
-                    <h2>Danh sách bài khảo sát cho sinh viên</h2>
-                </div>
-                <div class="box-content">
-                    <ul>
-                        @foreach($post_student as $post)
-                            <li><a href="{{route('detail', $post->slug)}}">{{$post->title}}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        @endif
-
-        @if(isset($post_teacher))
-            <div class="box mt-2">
-                <div class="box-header">
-                    <h2>Danh sách bài khảo sát cho giảng viên</h2>
-                </div>
-                <div class="box-content">
-                    <ul>
-                        @foreach($post_teacher as $post)
-                            <li><a href="{{route('detail', $post->slug)}}">{{$post->title}}</a></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        @endif
-
-        @if(isset($post_enterprise))
-            <div class="box mt-2">
-                <div class="box-header">
-                    <h2>Danh sách bài khảo sát cho doanh nghiệp</h2>
-                </div>
-                <div class="box-content">
-                    <ul>
-                        @foreach($post_enterprise as $post)
-                            <li><a href="{{route('detail', $post->slug)}}">{{$post->title}}</a></li>
+                    <ul class="list-unstyled pl-3">
+                        @foreach ($post_result as $result)
+                            <li><i class="fas fa-check"></i> <a
+                                    href="{{ route('detail', $result->post->slug) }}">{{ $result->post->title }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

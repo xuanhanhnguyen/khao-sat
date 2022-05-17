@@ -1,1 +1,1 @@
-<p class="text-center">Copyright © 2020</p>
+<p class="text-center">Đại học vinh © 2022</p>

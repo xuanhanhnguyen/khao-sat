@@ -12,41 +12,15 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        if (!Auth::check() || Auth::user()->role_id == 1) {
-            $post_new = Post::has('checkQuestions')->where([
-                ['status', '=', 1],
-            ])
-                ->orderBy('created_at', 'desc')
-                ->limit(10)
-                ->get();
-
-            $post_student = Post::has('checkQuestions')->where([
-                ['status', '=', 1],
-                ['respondent', 'like', '%' . Role::find(2)->name . '%']
-            ])
-                ->orderBy('created_at', 'desc')
-                ->limit(10)
-                ->get();
-
-            $post_teacher = Post::has('checkQuestions')->where([
-                ['status', '=', 1],
-                ['respondent', 'like', '%' . Role::find(3)->name . '%']
-            ])
-                ->orderBy('created_at', 'desc')
-                ->limit(10)
-                ->get();
-
-            $post_enterprise = Post::has('checkQuestions')->where([
-                ['status', '=', 1],
-                ['respondent', 'like', '%' . Role::find(4)->name . '%']
-            ])
-                ->orderBy('created_at', 'desc')
-                ->limit(10)
-                ->get();
-
-            return view('home', compact('post_new', 'post_student', 'post_teacher', 'post_enterprise'));
+        if (Auth::user()->role_id == 1) {
+            return redirect('/admin');
         } else {
             $post_new = Post::has('checkQuestions')->where([
                 ['status', '=', 1],
